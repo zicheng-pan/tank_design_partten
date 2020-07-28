@@ -9,13 +9,24 @@ public class Bullet {
     private Direction dir;
     private static int WIDTH = 15, HEIGHT = 15;
 
-    public Bullet(int x, int y, Direction dir) {
+    //用于判断是不是还活着
+    private Boolean live = true;
+
+    private TankFrame tf;
+
+    public Bullet(int x, int y, Direction dir, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.tf = tf;
     }
 
     public void paint(Graphics g) {
+
+        if (!live) {
+            //这样的处理方式有bug的  Exception in thread "AWT-EventQueue-0" java.util.ConcurrentModificationException
+            tf.myBullets.remove(this);
+        }
         Color c = g.getColor();
         g.setColor(Color.RED);
         g.fillOval(x, y, WIDTH, HEIGHT);
@@ -39,6 +50,9 @@ public class Bullet {
             default:
                 break;
         }
+
+        if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT)
+            live = false;
     }
 
 }

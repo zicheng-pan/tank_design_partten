@@ -60,7 +60,7 @@ public class Tank {
 
     public void fire() {
         //如果子弹不及时的清除掉，就会有内存泄漏的问题
-        tf.myBullets.add(new Bullet(this.x, this.y, this.dir));
+        tf.myBullets.add(new Bullet(this.x, this.y, this.dir, this.tf));
     }
 
     public int getX() {

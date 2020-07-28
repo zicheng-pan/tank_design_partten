@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class TankFrame extends Frame {
@@ -61,10 +62,22 @@ public class TankFrame extends Frame {
 //            default:
 //                break;
 //        }
+        /*  这种遍历方式用的是集合内部的迭代器，在迭代器迭代的时候，不允许自身容器对数据进行删除，只允许迭代器自己对数据进行删除，用迭代器
+        迭代的时候，只能在这个for循环里删除，不能在别的地方对集合类进行删除
         for (Bullet bullet : myBullets) {
             bullet.paint(g);
+        }*/
+        for (int i = 0; i < myBullets.size(); i++) {
+            //也可以在这里判断bullet是不是死了，live = false 那么在这里直接删除也可以
+            myBullets.get(i).paint(g);
         }
 
+        //使用迭代器的方式来进行删除子弹
+        /*        for (Iterator<Bullet> it = myBullets.iterator(); it.hasNext()) {
+            Bullet b = it.next();
+            if (!b.live) it.remove();
+        }
+        */
         Color c = g.getColor();
         g.setColor(Color.white);
         String showMessage = "bullet counts:" + myBullets.size();

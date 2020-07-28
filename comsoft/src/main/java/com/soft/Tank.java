@@ -9,6 +9,8 @@ public class Tank {
     //moving = true 的时候，才进行移动+-
     private boolean moving = false;
 
+    public static int HEIGHT = ResourceMgr.tankD.getHeight();
+    public static int WIDTH = ResourceMgr.tankD.getWidth();
     //因为只有TankFrame才可以paint 所以我们需要TankFrame
     private TankFrame tf = null;
 
@@ -74,8 +76,12 @@ public class Tank {
 
 
     public void fire() {
+        // 计算子弹的位置
+        int bx = this.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
+        int by = this.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
+
         //如果子弹不及时的清除掉，就会有内存泄漏的问题
-        tf.myBullets.add(new Bullet(this.x, this.y, this.dir, this.tf));
+        tf.myBullets.add(new Bullet(bx, by, this.dir, this.tf));
     }
 
     public int getX() {

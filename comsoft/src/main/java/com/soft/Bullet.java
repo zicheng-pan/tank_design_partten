@@ -7,7 +7,7 @@ public class Bullet {
     private static final int SPEED = 5;
     private int x, y;
     private Direction dir;
-    private static int WIDTH = 15, HEIGHT = 15;
+    public static int WIDTH = ResourceMgr.bulletD.getWidth(), HEIGHT = ResourceMgr.bulletD.getHeight();
 
     //用于判断是不是还活着
     private Boolean live = true;

@@ -27,9 +27,24 @@ public class Bullet {
             //这样的处理方式有bug的  Exception in thread "AWT-EventQueue-0" java.util.ConcurrentModificationException
             tf.myBullets.remove(this);
         }
-        Color c = g.getColor();
-        g.setColor(Color.RED);
-        g.fillOval(x, y, WIDTH, HEIGHT);
+//        Color c = g.getColor();
+//        g.setColor(Color.RED);
+//        g.fillOval(x, y, WIDTH, HEIGHT);
+        switch (dir) {
+            case UP:
+                g.drawImage(ResourceMgr.bulletU, x, y, null);
+                break;
+            case LEFT:
+                g.drawImage(ResourceMgr.bulletL, x, y, null);
+                break;
+            case DOWN:
+                g.drawImage(ResourceMgr.bulletD, x, y, null);
+                break;
+            case RIGHT:
+                g.drawImage(ResourceMgr.bulletR, x, y, null);
+                break;
+
+        }
         move();
     }
 

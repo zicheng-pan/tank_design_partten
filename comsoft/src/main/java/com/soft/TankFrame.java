@@ -22,6 +22,9 @@ public class TankFrame extends Frame {
     //容器中的引用，如果不及时清掉的话，就有内存泄漏的问题。
     List<Bullet> myBullets = new ArrayList<Bullet>();
 
+    //敌人坦克，是一个集合
+    List<Tank> tanks = new ArrayList<Tank>();
+
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
 
     public TankFrame() {
@@ -71,7 +74,11 @@ public class TankFrame extends Frame {
             //也可以在这里判断bullet是不是死了，live = false 那么在这里直接删除也可以
             myBullets.get(i).paint(g);
         }
-
+        //绘画所有的敌人坦克
+        for (int i = 0; i < tanks.size(); i++) {
+            //也可以在这里判断bullet是不是死了，live = false 那么在这里直接删除也可以
+            tanks.get(i).paint(g);
+        }
         //使用迭代器的方式来进行删除子弹
         /*        for (Iterator<Bullet> it = myBullets.iterator(); it.hasNext()) {
             Bullet b = it.next();

@@ -9,6 +9,8 @@ public class Tank {
     //moving = true 的时候，才进行移动+-
     private boolean moving = false;
 
+    private boolean live = true;
+
     public static int HEIGHT = ResourceMgr.tankD.getHeight();
     public static int WIDTH = ResourceMgr.tankD.getWidth();
     //因为只有TankFrame才可以paint 所以我们需要TankFrame
@@ -34,6 +36,10 @@ public class Tank {
 //        Color c = g.getColor();
 //        g.setColor(Color.yellow);
 //        g.fillRect(x, y, 50, 50);
+        if (!live) {
+            this.tf.tanks.remove(this);
+//            return;
+        }
         switch (dir) {
             case UP:
                 g.drawImage(ResourceMgr.tankU, x, y, null);
@@ -110,5 +116,9 @@ public class Tank {
 
     public int getSPEED() {
         return SPEED;
+    }
+
+    public void die() {
+        this.live = false;
     }
 }

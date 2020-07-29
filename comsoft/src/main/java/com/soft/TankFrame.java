@@ -89,7 +89,20 @@ public class TankFrame extends Frame {
         g.setColor(Color.white);
         String showMessage = "bullet counts:" + myBullets.size();
         g.drawString(showMessage, 10, 60);
+        String showMessage2 = "enemy counts:" + tanks.size();
+        g.drawString(showMessage2, 10, 80);
         g.setColor(c);
+
+
+        /*
+            进行子弹和坦克之间的碰撞比较
+        * */
+        for (int i = 0; i < myBullets.size(); i++) {
+            Bullet bullet = myBullets.get(i);
+            for (int j = 0; j < tanks.size(); j++) {
+                bullet.collideWith(tanks.get(j));
+            }
+        }
     }
 
     //使用双缓冲技术来解决刷屏，屏幕闪问题

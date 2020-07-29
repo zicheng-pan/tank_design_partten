@@ -70,4 +70,16 @@ public class Bullet {
             live = false;
     }
 
+    public void collideWith(Tank tank) {
+        Rectangle rec1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
+        Rectangle rec2 = new Rectangle(tank.getX(), tank.getY(), tank.WIDTH, tank.HEIGHT);
+        if (rec1.intersects(rec2)) {
+            tank.die();
+            this.die();
+        }
+    }
+
+    private void die() {
+        this.live = false;
+    }
 }

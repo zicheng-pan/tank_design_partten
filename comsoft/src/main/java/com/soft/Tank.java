@@ -1,13 +1,18 @@
 package com.soft;
 
 import java.awt.*;
+import java.util.Random;
 
 public class Tank {
     private int x, y;
     private Direction dir = Direction.DOWN;
-    private final int SPEED = 5;
+    private final int SPEED = 3;
     //moving = true 的时候，才进行移动+-
-    private boolean moving = false;
+    private boolean moving = true;
+    private Random random = new Random();
+
+    //默认是不好的
+    public Group group = Group.BAD;
 
     private boolean live = true;
 
@@ -25,10 +30,11 @@ public class Tank {
     }
 
 
-    public Tank(int x, int y, Direction dir, TankFrame tf) {
+    public Tank(int x, int y, Direction dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.group = group;
         this.tf = tf;
     }
 
@@ -78,6 +84,9 @@ public class Tank {
                     break;
             }
         }
+        if (random.nextInt(10) > 8) {
+            this.fire();
+        }
     }
 
 
@@ -87,7 +96,7 @@ public class Tank {
         int by = this.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
 
         //如果子弹不及时的清除掉，就会有内存泄漏的问题
-        tf.myBullets.add(new Bullet(bx, by, this.dir, this.tf));
+        tf.myBullets.add(new Bullet(bx, by, this.dir, this.group, this.tf));
     }
 
     public int getX() {

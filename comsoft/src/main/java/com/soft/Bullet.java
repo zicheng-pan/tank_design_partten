@@ -14,11 +14,15 @@ public class Bullet {
 
     private TankFrame tf;
 
-    public Bullet(int x, int y, Direction dir, TankFrame tf) {
+    //同样的将子弹也区分好坏
+    public Group group = Group.BAD;
+
+    public Bullet(int x, int y, Direction dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.tf = tf;
+        this.group = group;
     }
 
     public void paint(Graphics g) {
@@ -71,6 +75,9 @@ public class Bullet {
     }
 
     public void collideWith(Tank tank) {
+        if (this.group == tank.group)
+            return;
+        //TODO 用一个Rect来记录子弹的位置，每次都new出来太多了，java越来越多的内存占用，垃圾回收器会占用时间。
         Rectangle rec1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
         Rectangle rec2 = new Rectangle(tank.getX(), tank.getY(), tank.WIDTH, tank.HEIGHT);
         if (rec1.intersects(rec2)) {

@@ -17,8 +17,9 @@ public class TankFrame extends Frame {
 //    //因为只有一个所以不用static修饰
 //    private final int SPEED = 10;
     //封装上面的代码的过程，用起来会比较方便
-    Tank myTank = new Tank(200, 200, Direction.DOWN, this);
+    Tank myTank = new Tank(200, 200, Direction.DOWN, Group.GOOD, this);
 
+    Explode explode = new Explode(100, 100, this);
     //容器中的引用，如果不及时清掉的话，就有内存泄漏的问题。
     List<Bullet> myBullets = new ArrayList<Bullet>();
 
@@ -45,6 +46,7 @@ public class TankFrame extends Frame {
     //窗口在直接调用Frame 的时候就自动的调用这个方法了
     @Override
     public void paint(Graphics g) {
+        explode.paint(g);
 //        System.out.println("paint");
         //如果从tank 这个对象中，把变量一个一个的取出来，这样就又拆开了封装，不好，所以tank本身最知道应该自己处在哪个位置，怎么画，所以使用
         myTank.paint(g);//就像DOG 这个类，有一个方法，抓老鼠，如果把DOG的属性一个一个拿出来就相当于自己帮Dog来实现抓老鼠了，实际上应该Dog自己去抓老鼠

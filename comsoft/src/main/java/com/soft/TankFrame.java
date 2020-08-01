@@ -17,9 +17,10 @@ public class TankFrame extends Frame {
 //    //因为只有一个所以不用static修饰
 //    private final int SPEED = 10;
     //封装上面的代码的过程，用起来会比较方便
-    Tank myTank = new Tank(200, 200, Direction.DOWN, Group.GOOD, this);
+    Tank myTank = new Tank(200, 250, Direction.DOWN, Group.GOOD, this);
 
-    Explode explode = new Explode(100, 100, this);
+    // 爆炸应该也是一个集合
+    List<Explode> explodes = new ArrayList<Explode>();
     //容器中的引用，如果不及时清掉的话，就有内存泄漏的问题。
     List<Bullet> myBullets = new ArrayList<Bullet>();
 
@@ -46,7 +47,7 @@ public class TankFrame extends Frame {
     //窗口在直接调用Frame 的时候就自动的调用这个方法了
     @Override
     public void paint(Graphics g) {
-        explode.paint(g);
+
 //        System.out.println("paint");
         //如果从tank 这个对象中，把变量一个一个的取出来，这样就又拆开了封装，不好，所以tank本身最知道应该自己处在哪个位置，怎么画，所以使用
         myTank.paint(g);//就像DOG 这个类，有一个方法，抓老鼠，如果把DOG的属性一个一个拿出来就相当于自己帮Dog来实现抓老鼠了，实际上应该Dog自己去抓老鼠
@@ -81,6 +82,14 @@ public class TankFrame extends Frame {
             //也可以在这里判断bullet是不是死了，live = false 那么在这里直接删除也可以
             tanks.get(i).paint(g);
         }
+
+        //画炸弹爆炸效果
+        //绘画所有的敌人坦克
+        for (int i = 0; i < explodes.size(); i++) {
+            //也可以在这里判断bullet是不是死了，live = false 那么在这里直接删除也可以
+            explodes.get(i).paint(g);
+        }
+
         //使用迭代器的方式来进行删除子弹
         /*        for (Iterator<Bullet> it = myBullets.iterator(); it.hasNext()) {
             Bullet b = it.next();
@@ -93,6 +102,8 @@ public class TankFrame extends Frame {
         g.drawString(showMessage, 10, 60);
         String showMessage2 = "enemy counts:" + tanks.size();
         g.drawString(showMessage2, 10, 80);
+        String showMessage3 = "explodes counts:" + explodes.size();
+        g.drawString(showMessage3, 10, 100);
         g.setColor(c);
 
 

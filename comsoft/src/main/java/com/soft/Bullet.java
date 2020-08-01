@@ -83,6 +83,8 @@ public class Bullet {
         if (rec1.intersects(rec2)) {
             tank.die();
             this.die();
+            //在坦克死，子弹死的时候显示爆炸
+            tf.explodes.add(new Explode(x, y, tf));
         }
     }
 

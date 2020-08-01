@@ -16,8 +16,8 @@ public class Tank {
 
     private boolean live = true;
 
-    public static int HEIGHT = ResourceMgr.tankD.getHeight();
-    public static int WIDTH = ResourceMgr.tankD.getWidth();
+    public static int HEIGHT = ResourceMgr.goodtankD.getHeight();
+    public static int WIDTH = ResourceMgr.goodtankD.getWidth();
     //因为只有TankFrame才可以paint 所以我们需要TankFrame
     private TankFrame tf = null;
 
@@ -46,18 +46,19 @@ public class Tank {
             this.tf.tanks.remove(this);
 //            return;
         }
+
         switch (dir) {
             case UP:
-                g.drawImage(ResourceMgr.tankU, x, y, null);
+                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodtankU : ResourceMgr.badtankU, x, y, null);
                 break;
             case LEFT:
-                g.drawImage(ResourceMgr.tankL, x, y, null);
+                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodtankL : ResourceMgr.badtankL, x, y, null);
                 break;
             case DOWN:
-                g.drawImage(ResourceMgr.tankD, x, y, null);
+                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodtankD : ResourceMgr.badtankD, x, y, null);
                 break;
             case RIGHT:
-                g.drawImage(ResourceMgr.tankR, x, y, null);
+                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodtankR : ResourceMgr.badtankR, x, y, null);
                 break;
 
         }

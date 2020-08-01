@@ -84,9 +84,19 @@ public class Tank {
                     break;
             }
         }
-        if (random.nextInt(10) > 8) {
+        if (Group.BAD == this.group && random.nextInt(100) > 95) {
             this.fire();
         }
+        //加上个判断不然敌方坦克，一直在鬼畜
+        if (this.group == Group.BAD && random.nextInt(100) > 95) {
+            //每次move的时候随机给一个方向
+            randomDir();
+        }
+    }
+
+    private void randomDir() {
+        //enum . values 就可以获取数组，通过下标就可以拿去值
+        this.dir = Direction.values()[random.nextInt(4)];
     }
 
 

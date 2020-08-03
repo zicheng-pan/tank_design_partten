@@ -11,6 +11,8 @@ public class Tank {
     private boolean moving = true;
     private Random random = new Random();
 
+    Rectangle rect = new Rectangle();
+
     //默认是不好的
     public Group group = Group.BAD;
 
@@ -36,6 +38,10 @@ public class Tank {
         this.dir = dir;
         this.group = group;
         this.tf = tf;
+        rect.x = this.x;
+        rect.y = this.y;
+        rect.height = HEIGHT;
+        rect.width = WIDTH;
     }
 
     public void paint(Graphics g) {
@@ -93,6 +99,20 @@ public class Tank {
             //每次move的时候随机给一个方向
             randomDir();
         }
+
+        boudsCheck();
+        // 让我们的矩形也跟着移动
+        rect.x = this.x;
+        rect.y = this.y;
+
+    }
+
+    // 坦克的边界检测
+    private void boudsCheck() {
+        if (this.x < 0) x = 0;
+        if (this.y < 30) y = 30;
+        if (this.x > TankFrame.GAME_WIDTH - Tank.WIDTH) this.x = TankFrame.GAME_WIDTH - Tank.WIDTH;
+        if (this.y > TankFrame.GAME_HEIGHT - Tank.HEIGHT) this.y = TankFrame.GAME_HEIGHT - Tank.HEIGHT;
     }
 
     private void randomDir() {
